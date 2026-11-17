@@ -1,6 +1,15 @@
 import { Node, mergeAttributes } from '@tiptap/core';
+import type { CommandProps } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import TwitterEmbedComponent from './TwitterEmbedComponent';
+
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    twitterEmbed: {
+      setTwitterEmbed: (options: { tweetId: string }) => ReturnType;
+    };
+  }
+}
 
 export const TwitterEmbed = Node.create({
   name: 'twitterEmbed',
@@ -28,7 +37,7 @@ export const TwitterEmbed = Node.create({
 
   addCommands() {
     return {
-      setTwitterEmbed: (options: { tweetId: string }) => ({ commands }: any) => {
+      setTwitterEmbed: (options: { tweetId: string }) => ({ commands }: CommandProps) => {
         return commands.insertContent({
           type: 'twitterEmbed',
           attrs: options,

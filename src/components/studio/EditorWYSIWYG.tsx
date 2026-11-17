@@ -2,12 +2,12 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import { BubbleMenu, FloatingMenu } from '@tiptap/react/menus';
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import Youtube from '@tiptap/extension-youtube';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import type { Editor } from '@tiptap/core';
 import { common, createLowlight } from 'lowlight';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import CodeBlockComponent from './CodeBlockComponent';
@@ -20,7 +20,6 @@ const lowlight = createLowlight(common);
 import {
   Link as LinkIcon,
   Image as ImageIcon,
-  Play as YoutubeIcon,
   Code,
   Braces,
   MoreHorizontal,
@@ -28,7 +27,6 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
-  Maximize2,
   Sparkles,
 } from 'lucide-react';
 
@@ -37,7 +35,7 @@ interface Props {
   onContentChange?: (json: string) => void;
   onSelectedTextChange?: (text: string) => void;
   onInlineAIRequest?: (prompt: string) => void;
-  editorRef?: React.MutableRefObject<any>;
+  editorRef?: React.MutableRefObject<Editor | null>;
 }
 
 export default function EditorWYSIWYG({ initialContent = '', onContentChange, onSelectedTextChange, onInlineAIRequest, editorRef }: Props) {
@@ -175,7 +173,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
         throw new Error(errorData.error || 'Upload fallido');
       }
       const { url } = (await res.json()) as { url: string };
-      (activeEditor.chain().focus() as any).setImage({ src: url, alt: file.name }).run();
+      activeEditor.chain().focus().setImage({ src: url, alt: file.name }).run();
     } catch (err) {
       console.error('[EditorWYSIWYG] Upload error:', err);
     }
@@ -235,7 +233,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
     // 2. Twitter / X
     const twitterMatch = url.match(/(?:twitter\.com|x\.com)\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)/);
     if (twitterMatch && twitterMatch[3]) {
-      (editor.commands as any).setTwitterEmbed({ tweetId: twitterMatch[3] });
+      editor.commands.setTwitterEmbed({ tweetId: twitterMatch[3] });
       return;
     }
 
@@ -245,12 +243,12 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
       const type = spotifyMatch[1];
       const id = spotifyMatch[2];
       const srcUrl = `https://open.spotify.com/embed/${type}/${id}`;
-      (editor.commands as any).setSpotifyEmbed({ src: srcUrl });
+      editor.commands.setSpotifyEmbed({ src: srcUrl });
       return;
     }
 
     // 4. Fallback (Bookmark Link Preview)
-    (editor.commands as any).setBookmarkEmbed({ url });
+    editor.commands.setBookmarkEmbed({ url });
   };
 
   const openLinkPopover = useCallback(() => {

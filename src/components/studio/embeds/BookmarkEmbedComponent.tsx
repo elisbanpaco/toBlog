@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 import { GripVertical } from 'lucide-react';
 
-export default function BookmarkEmbedComponent({ node, updateAttributes, editor }: any) {
+export default function BookmarkEmbedComponent({ node, updateAttributes, editor }: NodeViewProps) {
   const isEditable = editor?.isEditable ?? false;
   const { url, title, description, image, domain, isLoaded } = node.attrs;
   const [loading, setLoading] = useState(!isLoaded);

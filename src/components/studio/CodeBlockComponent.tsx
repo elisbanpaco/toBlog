@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 
 const LANGUAGES = [
   { value: 'null', label: 'Auto' },
@@ -39,7 +40,7 @@ const LANGUAGES = [
   { value: 'yaml', label: 'YAML' },
 ];
 
-export default function CodeBlockComponent({ node, updateAttributes, extension, selected, editor }: any) {
+export default function CodeBlockComponent({ node, updateAttributes, selected, editor }: NodeViewProps) {
   const isEditable = editor?.isEditable ?? false;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

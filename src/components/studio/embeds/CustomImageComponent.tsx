@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 import { AlignCenter, Maximize2 } from 'lucide-react';
 
-export default function CustomImageComponent({ node, updateAttributes, selected }: any) {
+export default function CustomImageComponent({ node, updateAttributes, selected }: NodeViewProps) {
   const [showAltInput, setShowAltInput] = useState(false);
 
   return (
     <NodeViewWrapper className={`custom-image-node my-8 relative flex flex-col items-center group`}>
       {/* Bubble Menu para la Imagen */}
       {selected && (
-        <div 
+        <div
           className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[#262625] text-white rounded-md flex items-center shadow-lg z-50 p-1 gap-1"
           contentEditable={false}
         >
-          <button 
+          <button
             type="button"
             onMouseDown={(e) => e.preventDefault()}
             className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'center' ? 'text-indigo-400' : 'text-neutral-300'}`}
@@ -22,7 +23,7 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
           >
             <AlignCenter size={16} />
           </button>
-          <button 
+          <button
             type="button"
             onMouseDown={(e) => e.preventDefault()}
             className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'full' ? 'text-indigo-400' : 'text-neutral-300'}`}
@@ -31,12 +32,12 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
           >
             <Maximize2 size={16} />
           </button>
-          
+
           <div className="w-px h-4 bg-neutral-600 mx-1"></div>
-          
+
           {showAltInput ? (
-            <input 
-              type="text" 
+            <input
+              type="text"
               autoFocus
               className="bg-neutral-800 border border-neutral-600 rounded px-2 py-1 text-sm text-white w-48 outline-none focus:border-indigo-400"
               placeholder="Escribe el texto alt..."
@@ -50,7 +51,7 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
               }}
             />
           ) : (
-            <button 
+            <button
               type="button"
               onMouseDown={(e) => e.preventDefault()}
               className="px-3 py-1.5 rounded hover:bg-neutral-700 text-sm font-medium text-neutral-300 transition-colors"
@@ -70,10 +71,10 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
           contentEditable={false}
         />
       </div>
-      
-      <NodeViewContent 
-        as="figcaption" 
-        className={`mt-3 text-center text-[0.95rem] text-slate-500 focus:outline-none w-full ${node.attrs.align === 'full' ? 'max-w-4xl' : ''}`} 
+
+      <NodeViewContent
+        as="figcaption"
+        className={`mt-3 text-center text-[0.95rem] text-slate-500 focus:outline-none w-full ${node.attrs.align === 'full' ? 'max-w-4xl' : ''}`}
         data-placeholder="Escribe una leyenda para la imagen (opcional)..."
       />
     </NodeViewWrapper>

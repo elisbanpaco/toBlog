@@ -1,6 +1,15 @@
 import { Node, mergeAttributes } from '@tiptap/core';
+import type { CommandProps } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import SpotifyEmbedComponent from './SpotifyEmbedComponent';
+
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    spotifyEmbed: {
+      setSpotifyEmbed: (options: { src: string }) => ReturnType;
+    };
+  }
+}
 
 export const SpotifyEmbed = Node.create({
   name: 'spotifyEmbed',
@@ -28,7 +37,7 @@ export const SpotifyEmbed = Node.create({
 
   addCommands() {
     return {
-      setSpotifyEmbed: (options: { src: string }) => ({ commands }: any) => {
+      setSpotifyEmbed: (options: { src: string }) => ({ commands }: CommandProps) => {
         return commands.insertContent({
           type: 'spotifyEmbed',
           attrs: options,

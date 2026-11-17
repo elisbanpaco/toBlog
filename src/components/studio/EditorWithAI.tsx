@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import type { Editor } from '@tiptap/core';
 import EditorWYSIWYG from './EditorWYSIWYG';
 import AIEditorToolbar from './AIEditorToolbar';
 import { useAI } from '../../lib/useAI';
@@ -15,7 +16,7 @@ interface Props {
  */
 export default function EditorWithAI({ initialContent = '' }: Props) {
   const [selectedText, setSelectedText] = useState('');
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<Editor | null>(null);
   const { generate } = useAI();
 
   const handleInsertText = useCallback((text: string) => {

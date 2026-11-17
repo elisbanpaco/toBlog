@@ -1,6 +1,15 @@
 import { Node, mergeAttributes } from '@tiptap/core';
+import type { CommandProps } from '@tiptap/core';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import BookmarkEmbedComponent from './BookmarkEmbedComponent';
+
+declare module '@tiptap/core' {
+  interface Commands<ReturnType> {
+    bookmarkEmbed: {
+      setBookmarkEmbed: (options: { url: string }) => ReturnType;
+    };
+  }
+}
 
 export const BookmarkEmbed = Node.create({
   name: 'bookmarkEmbed',
@@ -33,7 +42,7 @@ export const BookmarkEmbed = Node.create({
 
   addCommands() {
     return {
-      setBookmarkEmbed: (options: { url: string }) => ({ commands }: any) => {
+      setBookmarkEmbed: (options: { url: string }) => ({ commands }: CommandProps) => {
         return commands.insertContent({
           type: 'bookmarkEmbed',
           attrs: options,

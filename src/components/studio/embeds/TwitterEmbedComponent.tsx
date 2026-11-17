@@ -1,9 +1,10 @@
 import React from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 import { GripVertical } from 'lucide-react';
 import { Tweet } from 'react-tweet';
 
-export default function TwitterEmbedComponent({ node, editor }: any) {
+export default function TwitterEmbedComponent({ node, editor }: NodeViewProps) {
   const isEditable = editor?.isEditable ?? false;
   return (
     <NodeViewWrapper className="twitter-embed my-6 flex justify-center w-full relative group" contentEditable={false}>

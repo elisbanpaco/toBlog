@@ -1,8 +1,9 @@
 import React from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 import { GripVertical } from 'lucide-react';
 
-export default function SpotifyEmbedComponent({ node, editor }: any) {
+export default function SpotifyEmbedComponent({ node, editor }: NodeViewProps) {
   const isEditable = editor?.isEditable ?? false;
   return (
     <NodeViewWrapper className="spotify-embed my-6 w-full relative group" contentEditable={false}>

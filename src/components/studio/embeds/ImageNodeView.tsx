@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
+import type { NodeViewProps } from '@tiptap/react';
 import { GripVertical } from 'lucide-react';
 
-export default function ImageNodeView({ node, updateAttributes, selected, editor }: any) {
+export default function ImageNodeView({ node, updateAttributes, selected, editor }: NodeViewProps) {
   const containerRef = useRef<HTMLElement>(null);
   const [isResizing, setIsResizing] = useState(false);
   const [currentWidth, setCurrentWidth] = useState(node.attrs.width || '100%');

@@ -178,8 +178,8 @@ export const postActions = {
         });
 
         return { success: true, newId };
-      } catch (e: any) {
-        throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: e.message || 'Error de BD' });
+      } catch (e: unknown) {
+        throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: e instanceof Error ? e.message : 'Error de BD' });
       }
     },
   }),

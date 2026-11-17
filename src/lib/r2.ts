@@ -8,8 +8,8 @@ const getEnv = (key: string): string => {
   if (typeof process !== 'undefined' && process.env && process.env[key]) {
     return process.env[key]!;
   }
-  const metaEnv = import.meta.env as Record<string, any>;
-  return metaEnv?.[key] || '';
+  const value = import.meta.env[key];
+  return typeof value === 'string' ? value : '';
 };
 
 export function getR2Client(): S3Client {

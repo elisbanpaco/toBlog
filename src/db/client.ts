@@ -6,7 +6,8 @@ const getEnv = (key: string) => {
   if (typeof process !== 'undefined' && process.env && process.env[key]) {
     return process.env[key];
   }
-  return (import.meta.env as Record<string, any>)[key];
+  const value = import.meta.env[key];
+  return typeof value === 'string' ? value : undefined;
 };
 
 let rawUrl = (getEnv('TURSO_DATABASE_URL') || 'file:.astro/content.db').trim();

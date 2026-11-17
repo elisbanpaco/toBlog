@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
-  } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  } catch (error: unknown) {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Error al registrar la lectura' }), { status: 500 });
   }
 };

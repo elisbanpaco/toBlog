@@ -34,7 +34,7 @@ export const profileActions = {
           .where(eq(users.id, user.id));
 
         return { success: true };
-      } catch (e) {
+      } catch {
         throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: 'Failed to update profile' });
       }
     },
@@ -60,7 +60,7 @@ export const profileActions = {
         context.cookies.set(blankCookie.name, blankCookie.value, blankCookie.attributes);
         
         return { success: true };
-      } catch (e) {
+      } catch {
         throw new ActionError({ code: 'INTERNAL_SERVER_ERROR', message: 'Error al borrar la cuenta' });
       }
     }

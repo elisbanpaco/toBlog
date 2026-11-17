@@ -241,7 +241,7 @@ export const interactionActions = {
       // Fetch all comment likes for these comments and attach them
       const commentIds = rows.map(r => r.id);
       
-      let allCommentLikes: any[] = [];
+      let allCommentLikes: { commentId: string; totalLikes: number }[] = [];
       if (commentIds.length > 0) {
         // Obtenemos los totales por comentario
         allCommentLikes = await db
@@ -256,7 +256,7 @@ export const interactionActions = {
       }
 
       // Si el usuario está logueado, obtenemos sus likes personales
-      let userCommentLikesMap: Record<string, number> = {};
+      const userCommentLikesMap: Record<string, number> = {};
       const sessionId = context.cookies.get(lucia.sessionCookieName)?.value;
       if (sessionId) {
         const { session, user } = await lucia.validateSession(sessionId);

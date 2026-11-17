@@ -34,7 +34,7 @@ export const GET: APIRoute = async ({ request }) => {
         'Content-Type': 'application/json'
       }
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Failed to fetch' }), { status: 500 });
   }
 };

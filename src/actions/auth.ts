@@ -114,19 +114,19 @@ export const authActions = {
               <p>Este enlace expirará en 15 minutos.</p>
             `,
           });
-        } catch (err: any) {
+        } catch (err: unknown) {
           console.error("Error al enviar email via Resend:", err);
           // Si falla el envío de mail, no tumbamos el registro con un 500
         }
       }
 
         return { success: true, email: input.email };
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("REGISTER ERROR:", err);
         if (err instanceof ActionError) throw err;
         throw new ActionError({
           code: 'INTERNAL_SERVER_ERROR',
-          message: err.message || 'Error al procesar el registro.',
+          message: err instanceof Error ? err.message : 'Error al procesar el registro.',
         });
       }
     }
@@ -245,7 +245,7 @@ export const authActions = {
               </a>
             `,
           });
-        } catch (err: any) {
+        } catch (err: unknown) {
           console.error("Error al enviar email de recuperación:", err);
         }
       }

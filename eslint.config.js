@@ -39,6 +39,6 @@ export default tsEslint.config(
 
   // Ignorar carpetas y archivos compilados
   {
-    ignores: ['dist/', '.astro/', 'node_modules/', '.vscode/', 'db/']
+    ignores: ['dist/', '.astro/', '.netlify/', 'node_modules/', '.vscode/', 'db/']
   }
 );

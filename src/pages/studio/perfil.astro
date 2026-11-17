@@ -187,7 +187,7 @@ const initialAvatar = dbUser?.avatarUrl || '';
       
       avatarUrlInput.value = url;
       avatarPreview.innerHTML = `<img src="${url}" alt="Avatar" class="w-full h-full object-cover" />`;
-    } catch (err) {
+    } catch {
       alert('Error al subir la imagen');
     } finally {
       avatarBtn.textContent = 'Cambiar foto';

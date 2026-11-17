@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { lucia } from '../lib/lucia';
-import { actions, isInputError } from 'astro:actions';
 
 // Si ya tiene sesión válida, redirigir al dashboard
 const sessionId = Astro.cookies.get(lucia.sessionCookieName)?.value;
@@ -267,7 +266,7 @@ if (sessionId) {
 
   const toggleBtns = document.querySelectorAll('.toggle-password');
   toggleBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const input = btn.previousElementSibling as HTMLInputElement;
       const icon = btn.querySelector('svg');
       if (!input || !icon) return;

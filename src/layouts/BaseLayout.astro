@@ -55,13 +55,6 @@ const ogImage      = image.startsWith('http') ? image : new URL(image, canonical
     <link rel="icon" type="image/png" href="/favicon.png" sizes="96x96" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
 
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body class="min-h-screen flex flex-col">
     <!-- ─── Header / Navegación estilo Medium ─────────────────────────────── -->
@@ -162,7 +155,7 @@ const ogImage      = image.startsWith('http') ? image : new URL(image, canonical
     gap:         0.5rem;
     font-weight: 800;
     font-size:   1.15rem;
-    color:       #1a1a1a;
+    color:       var(--color-text);
     letter-spacing: -0.03em;
   }
   .site-nav {
@@ -173,22 +166,21 @@ const ogImage      = image.startsWith('http') ? image : new URL(image, canonical
   .site-nav__link {
     font-size:  0.9rem;
     font-weight: 500;
-    color:      #6b6b6b;
+    color:      var(--color-text-muted);
     padding:    0.4rem 0.75rem;
     border-radius: 999px;
     transition: color 0.15s, background 0.15s;
   }
-  .site-nav__link:hover { color: #1a1a1a; background: #f2f2f2; }
+  .site-nav__link:hover { color: var(--color-text); background: #f2f2f2; }
   .site-nav__cta {
     font-size:     0.9rem;
     font-weight:   600;
     color:         #ffffff;
-    background:    #1a1a1a;
+    background:    var(--color-brand);
     padding:       0.45rem 1rem;
     border-radius: 999px;
     transition:    background 0.15s;
   }
-  .site-nav__cta:hover { background: #292929; }
-
+  .site-nav__cta:hover { background: var(--color-brand-hover); }
 
 </style>

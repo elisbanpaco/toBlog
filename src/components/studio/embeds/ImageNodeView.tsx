@@ -63,14 +63,14 @@ export default function ImageNodeView({ node, updateAttributes, selected, editor
           src={node.attrs.src} 
           alt={node.attrs.alt || ''} 
           draggable={false}
-          className={`rounded-lg max-w-full block transition-shadow duration-200 ${selected && isEditable ? 'ring-2 ring-emerald-500' : ''}`}
+          className={`rounded-lg max-w-full block transition-shadow duration-200 ${selected && isEditable ? 'ring-2 ring-indigo-400' : ''}`}
           style={{ width: '100%', height: 'auto' }}
         />
         
         {/* Resize Handle (only show when selected, not full width, AND in editable editor mode) */}
         {selected && !isFull && isEditable && (
           <div 
-            className="absolute -bottom-2 -right-2 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full cursor-nwse-resize shadow"
+            className="absolute -bottom-2 -right-2 w-4 h-4 bg-indigo-400 border-2 border-white rounded-full cursor-nwse-resize shadow"
             onMouseDown={onMouseDown}
           />
         )}

@@ -307,13 +307,13 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
                     setLinkUrl('');
                   }
                 }}
-                className="bg-transparent text-white border-b border-gray-500 focus:border-emerald-500 outline-none text-sm px-1 py-0.5 w-48 transition-colors"
+                className="bg-transparent text-white border-b border-gray-500 focus:border-indigo-400 outline-none text-sm px-1 py-0.5 w-48 transition-colors"
                 autoFocus
               />
               <button
                 type="button"
                 onClick={applyLink}
-                className="text-emerald-500 hover:text-emerald-400 font-bold"
+                className="text-indigo-400 hover:text-indigo-300 font-bold"
                 title="Aplicar enlace"
               >
                 ✓
@@ -428,13 +428,13 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
                   }
                   if (e.key === 'Escape') setIsAltPopoverOpen(false);
                 }}
-                className="bg-transparent text-white border-b border-emerald-500 focus:border-emerald-400 outline-none text-sm px-1 py-0.5 w-48"
+                className="bg-transparent text-white border-b border-indigo-400 focus:border-indigo-300 outline-none text-sm px-1 py-0.5 w-48"
                 autoFocus
               />
               <button 
                 type="button" 
                 onClick={() => { editor.commands.updateAttributes('image', { alt: altText }); setIsAltPopoverOpen(false); }} 
-                className="text-emerald-500 hover:text-emerald-400 font-bold px-1"
+                className="text-indigo-400 hover:text-indigo-300 font-bold px-1"
               >
                 ✓
               </button>
@@ -445,7 +445,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
                 type="button" 
                 onMouseDown={(e) => e.preventDefault()} 
                 onClick={() => editor.commands.updateAttributes('image', { align: 'left' })} 
-                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'left' ? 'text-emerald-500' : 'text-neutral-300'}`}
+                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'left' ? 'text-indigo-400' : 'text-neutral-300'}`}
                 title="Alineación izquierda"
               >
                 <AlignLeft size={16} />
@@ -454,7 +454,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
                 type="button" 
                 onMouseDown={(e) => e.preventDefault()} 
                 onClick={() => editor.commands.updateAttributes('image', { align: 'center' })} 
-                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'center' ? 'text-emerald-500' : 'text-neutral-300'}`}
+                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'center' ? 'text-indigo-400' : 'text-neutral-300'}`}
                 title="Centrar"
               >
                 <AlignCenter size={16} />
@@ -463,7 +463,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
                 type="button" 
                 onMouseDown={(e) => e.preventDefault()} 
                 onClick={() => editor.commands.updateAttributes('image', { align: 'right' })} 
-                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'right' ? 'text-emerald-500' : 'text-neutral-300'}`}
+                className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${editor.getAttributes('image').align === 'right' ? 'text-indigo-400' : 'text-neutral-300'}`}
                 title="Alineación derecha"
               >
                 <AlignRight size={16} />
@@ -656,7 +656,7 @@ export default function EditorWYSIWYG({ initialContent = '', onContentChange, on
           color: #ffffff;
         }
         .bubble-menu button.is-active {
-          color: #10b981; /* Verde sutil para activo */
+          color: #a5b4fc; /* Selección visible sobre la barra oscura */
         }
         .bubble-divider {
           width: 1px;

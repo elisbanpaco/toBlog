@@ -100,21 +100,21 @@ const posts = rows.map(row => ({
     font-weight:   700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color:         #1a8917;
+    color:         var(--color-brand);
     margin-bottom: 1rem;
   }
   .hero__title {
-    font-family:    Georgia, 'Times New Roman', serif;
+    font-family:    var(--font-serif);
     font-size:      clamp(2.2rem, 6vw, 3.5rem);
     font-weight:    700;
     line-height:    1.1;
     letter-spacing: -0.03em;
-    color:          #1a1a1a;
+    color:          var(--color-text);
     margin-bottom:  1rem;
   }
   .hero__sub {
     font-size:     1.05rem;
-    color:         #6b6b6b;
+    color:         var(--color-text-muted);
     line-height:   1.65;
     margin-bottom: 2rem;
     max-width:     520px;
@@ -122,14 +122,14 @@ const posts = rows.map(row => ({
   .hero__cta {
     display:       inline-block;
     padding:       0.65rem 1.4rem;
-    background:    #1a1a1a;
+    background:    var(--color-brand);
     color:         #ffffff;
     border-radius: 999px;
     font-size:     0.92rem;
     font-weight:   600;
     transition:    background 0.15s;
   }
-  .hero__cta:hover { background: #292929; }
+  .hero__cta:hover { background: var(--color-brand-hover); }
 
   /* ─── Feed reciente ─────────────────────────────────────────────── */
   .home-feed { padding: 0 1.5rem; }
@@ -147,14 +147,19 @@ const posts = rows.map(row => ({
   .home-feed__title {
     font-size:   1.1rem;
     font-weight: 700;
-    color:       #1a1a1a;
+    color:       var(--color-text);
     letter-spacing: -0.01em;
   }
   .home-feed__ver-mas {
     font-size:  0.85rem;
     font-weight: 500;
-    color:      #6b6b6b;
+    color:      var(--color-text-muted);
     transition: color 0.15s;
   }
-  .home-feed__ver-mas:hover { color: #1a1a1a; }
+  .home-feed__ver-mas:hover { color: var(--color-text); }
+  @media (max-width: 640px) {
+    .hero { padding: 2rem 1.5rem; }
+    .home-feed__header { gap: 0.75rem; flex-wrap: wrap; }
+    .home-feed__inner { padding-bottom: 1rem; }
+  }
 </style>

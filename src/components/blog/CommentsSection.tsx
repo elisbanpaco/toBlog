@@ -188,7 +188,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
           ) : comment.user?.avatarUrl ? (
             <img src={comment.user.avatarUrl} alt="avatar" className="w-8 h-8 rounded-full object-cover shrink-0 bg-gray-100" />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-medium shrink-0 text-sm">
+            <div className="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-medium shrink-0 text-sm">
               {comment.user?.displayName?.charAt(0).toUpperCase() || comment.user?.username.charAt(0).toUpperCase() || 'U'}
             </div>
           )}
@@ -274,7 +274,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
         {replyingToId === comment.id && (
           <div className={`mt-4 ${!isReply ? 'ml-3 pl-3 border-l-2' : 'mt-4'} border-gray-100 animate-in slide-in-from-top-2 duration-200`}>
             <form onSubmit={(e) => handleReplySubmit(e, comment.id)} className="relative">
-              <div className="bg-[#f9f9f9] rounded-lg border border-gray-200 shadow-sm overflow-hidden focus-within:border-emerald-400 focus-within:ring-1 focus-within:ring-emerald-400 transition-colors">
+              <div className="bg-[#f9f9f9] rounded-lg border border-gray-200 shadow-sm overflow-hidden focus-within:border-brand focus-within:ring-1 focus-within:ring-brand transition-colors">
                 <textarea 
                   autoFocus
                   value={replyContent}
@@ -293,7 +293,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
                   <button 
                     type="submit" 
                     disabled={replySubmitting || !replyContent.trim()}
-                    className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white px-4 py-1.5 rounded-full text-[13px] font-medium transition-colors shadow-sm"
+                    className="bg-brand hover:bg-brand-hover disabled:opacity-50 text-white px-4 py-1.5 rounded-full text-[13px] font-medium transition-colors shadow-sm"
                   >
                     {replySubmitting ? 'Enviando...' : 'Responder'}
                   </button>
@@ -319,7 +319,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
       <div>
         <div className="mb-10">
           <form onSubmit={handleMainSubmit} className="relative">
-              <div className={`rounded-xl transition-all shadow-sm ${mainComment.trim() ? 'bg-white border border-emerald-200 ring-1 ring-emerald-500' : 'bg-white border border-gray-200 hover:border-gray-300'}`}>
+              <div className={`rounded-xl transition-all shadow-sm ${mainComment.trim() ? 'bg-white border border-indigo-200 ring-1 ring-brand' : 'bg-white border border-gray-200 hover:border-gray-300'}`}>
                 <textarea 
                   value={mainComment}
                   onChange={(e) => setMainComment(e.target.value)}
@@ -339,7 +339,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
                     <button 
                       type="submit" 
                       disabled={mainSubmitting}
-                      className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white px-5 py-1.5 rounded-full text-[13px] font-medium transition-colors shadow-sm"
+                      className="bg-brand hover:bg-brand-hover disabled:opacity-50 text-white px-5 py-1.5 rounded-full text-[13px] font-medium transition-colors shadow-sm"
                     >
                       {mainSubmitting ? 'Enviando...' : 'Responder'}
                     </button>
@@ -351,7 +351,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
 
           {loading ? (
             <div className="flex justify-center p-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-600"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand"></div>
             </div>
           ) : comments.length === 0 ? (
             <div className="text-center py-10 text-gray-500 text-sm">

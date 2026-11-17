@@ -60,17 +60,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin: 0 auto;
   }
   .legal-page__title {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-serif);
     font-size: clamp(2.2rem, 6vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.03em;
-    color: #1a1a1a;
+    color: var(--color-text);
     margin-bottom: 0.5rem;
   }
   .legal-page__last-updated {
     font-size: 0.95rem;
-    color: #6b6b6b;
+    color: var(--color-text-muted);
     margin-bottom: 3rem;
   }
   .legal-page__content {
@@ -79,10 +79,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: #333333;
   }
   .legal-page__content h2 {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--color-text);
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }
@@ -99,6 +99,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .legal-page__content strong {
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--color-text);
   }
 </style>

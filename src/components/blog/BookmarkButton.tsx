@@ -44,7 +44,7 @@ export default function BookmarkButton({ postId, initialBookmarked = false }: Bo
       title={isBookmarked ? "Quitar de guardados" : "Guardar para después"}
     >
       <svg 
-        className={`transition-all duration-300 ease-out ${isAnimating ? 'scale-125' : 'scale-100'} ${isBookmarked ? 'text-emerald-600 fill-emerald-600' : 'text-[#6b6b6b] fill-transparent group-hover:text-[#1a1a1a]'}`}
+        className={`transition-all duration-300 ease-out ${isAnimating ? 'scale-125' : 'scale-100'} ${isBookmarked ? 'text-brand fill-brand' : 'text-[#6b6b6b] fill-transparent group-hover:text-[#1a1a1a]'}`}
         width="20" 
         height="20" 
         viewBox="0 0 24 24" 

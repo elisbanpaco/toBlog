@@ -21,9 +21,9 @@ export default function AuthModal({ isOpen, onClose, title = "Únete a la conver
         </button>
         
         <div className="p-8 text-center pt-10">
-          <h2 className="text-[26px] font-bold text-slate-900 mb-3" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>{title}</h2>
+          <h2 className="text-[26px] font-bold text-slate-900 mb-3" style={{ fontFamily: "var(--font-serif)" }}>{title}</h2>
           <p className="text-slate-600 mb-8 text-[15px] leading-relaxed px-4">
-            Crea una cuenta para aplaudir, guardar historias y compartir tus ideas.
+            Crea una cuenta para aplaudir, guardar artículos y compartir tus ideas.
           </p>
           
           <div className="space-y-3">
@@ -36,7 +36,7 @@ export default function AuthModal({ isOpen, onClose, title = "Únete a la conver
             </a>
             
             <p className="text-[14px] text-slate-500 mt-6 pt-6">
-              ¿Ya tienes una cuenta? <a href="/login" className="text-emerald-700 font-semibold hover:underline">Inicia sesión</a>
+              ¿Ya tienes una cuenta? <a href="/login" className="text-brand font-semibold hover:underline">Inicia sesión</a>
             </p>
           </div>
         </div>

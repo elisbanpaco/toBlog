@@ -16,7 +16,7 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
           <button 
             type="button"
             onMouseDown={(e) => e.preventDefault()}
-            className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'center' ? 'text-emerald-500' : 'text-neutral-300'}`}
+            className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'center' ? 'text-indigo-400' : 'text-neutral-300'}`}
             onClick={() => updateAttributes({ align: 'center' })}
             title="Centrar"
           >
@@ -25,7 +25,7 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
           <button 
             type="button"
             onMouseDown={(e) => e.preventDefault()}
-            className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'full' ? 'text-emerald-500' : 'text-neutral-300'}`}
+            className={`p-1.5 rounded hover:bg-neutral-700 transition-colors ${node.attrs.align === 'full' ? 'text-indigo-400' : 'text-neutral-300'}`}
             onClick={() => updateAttributes({ align: 'full' })}
             title="Ancho completo"
           >
@@ -38,7 +38,7 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
             <input 
               type="text" 
               autoFocus
-              className="bg-neutral-800 border border-neutral-600 rounded px-2 py-1 text-sm text-white w-48 outline-none focus:border-emerald-500"
+              className="bg-neutral-800 border border-neutral-600 rounded px-2 py-1 text-sm text-white w-48 outline-none focus:border-indigo-400"
               placeholder="Escribe el texto alt..."
               value={node.attrs.alt || ''}
               onChange={(e) => updateAttributes({ alt: e.target.value })}
@@ -63,10 +63,10 @@ export default function CustomImageComponent({ node, updateAttributes, selected 
       )}
 
       <div className={`transition-all duration-300 ease-in-out ${node.attrs.align === 'full' ? 'w-[100vw] relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]' : 'w-full max-w-4xl'}`}>
-        <img 
-          src={node.attrs.src} 
-          alt={node.attrs.alt || ''} 
-          className={`w-full h-auto rounded-lg transition-all duration-200 cursor-default ${selected ? 'ring-4 ring-emerald-500 ring-offset-2 ring-offset-white' : ''}`} 
+        <img
+          src={node.attrs.src}
+          alt={node.attrs.alt || ''}
+          className={`w-full h-auto rounded-lg transition-all duration-200 cursor-default ${selected ? 'ring-4 ring-indigo-400 ring-offset-2 ring-offset-white' : ''}`}
           contentEditable={false}
         />
       </div>

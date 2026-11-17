@@ -429,7 +429,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-[100] animate-in slide-in-from-bottom-5 fade-in duration-300">
+        <div className="fixed right-6 z-[100] animate-in slide-in-from-bottom-5 fade-in duration-300" style={{ bottom: 'calc(1.5rem + var(--mobile-nav-clearance, 0px))' }}>
           <div className="bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl flex items-center gap-3 text-[14.5px] font-medium">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5"><path d="M20 6L9 17l-5-5"/></svg>
             {toastMessage}

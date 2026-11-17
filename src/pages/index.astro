@@ -61,7 +61,7 @@ const posts = rows.map(row => ({
     <section class="home-feed">
       <div class="home-feed__inner">
         <div class="home-feed__header">
-          <h2 class="home-feed__title">Publicaciones recientes</h2>
+          <h2 class="home-feed__title">Artículos recientes</h2>
           <a href="/blog" class="home-feed__ver-mas">Ver todos →</a>
         </div>
         <div class="home-feed__list">
@@ -140,7 +140,7 @@ const posts = rows.map(row => ({
   }
   .home-feed__header {
     display:         flex;
-    align-items:     baseline;
+    align-items:     center;
     justify-content: space-between;
     margin-bottom:   0.5rem;
   }
@@ -151,6 +151,10 @@ const posts = rows.map(row => ({
     letter-spacing: -0.01em;
   }
   .home-feed__ver-mas {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0.5rem;
     font-size:  0.85rem;
     font-weight: 500;
     color:      var(--color-text-muted);

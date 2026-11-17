@@ -1,13 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { lucia } from '../lib/lucia';
-import { actions, isInputError } from 'astro:actions';
 
-// Si ya tiene sesión válida, redirigir al dashboard
+// Solo se admite el destino interno que necesita el acceso a Biblioteca.
+const redirectTo = Astro.url.searchParams.get('next') === '/biblioteca' ? '/biblioteca' : '/studio';
+
+// Si ya tiene sesión válida, continuar al destino solicitado
 const sessionId = Astro.cookies.get(lucia.sessionCookieName)?.value;
 if (sessionId) {
   const { session } = await lucia.validateSession(sessionId);
-  if (session) return Astro.redirect('/studio');
+  if (session) return Astro.redirect(redirectTo);
 }
 
 // Mantener compatibilidad si se pasa por url un error global externo
@@ -18,7 +20,7 @@ const errorMsg = Astro.url.searchParams.get('error');
     <div class="login-card">
 
       <h1 class="login-title">Iniciar sesión</h1>
-      <p class="login-subtitle">Accede a tu cuenta para continuar.</p>
+      <p class="login-subtitle">{redirectTo === '/biblioteca' ? 'Inicia sesión para ver tus artículos guardados.' : 'Accede a tu cuenta para continuar.'}</p>
 
       {errorMsg && (
         <div class="login-error" role="alert">{errorMsg}</div>
@@ -27,7 +29,7 @@ const errorMsg = Astro.url.searchParams.get('error');
         <div id="err-general" class="login-error" role="alert"></div>
       </div>
 
-      <form id="loginForm" class="login-form">
+      <form id="loginForm" data-redirect={redirectTo} class="login-form">
         <div class="form-group">
           <label for="username">Correo electrónico o Usuario</label>
           <input
@@ -245,7 +247,7 @@ const errorMsg = Astro.url.searchParams.get('error');
 
   const toggleBtns = document.querySelectorAll('.toggle-password');
   toggleBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const input = btn.previousElementSibling as HTMLInputElement;
       const icon = btn.querySelector('svg');
       if (!input || !icon) return;
@@ -277,7 +279,7 @@ const errorMsg = Astro.url.searchParams.get('error');
       btn.disabled = true;
 
       const formData = new FormData(form);
-      const { data, error } = await actions.login(formData);
+      const { error } = await actions.login(formData);
 
       if (error) {
         if (isInputError(error)) {
@@ -294,8 +296,7 @@ const errorMsg = Astro.url.searchParams.get('error');
         btn.style.opacity = '1';
         btn.disabled = false;
       } else {
-        // Redirigir al dashboard si tiene éxito
-        window.location.href = '/studio';
+        window.location.href = form.dataset.redirect || '/studio';
       }
     });
   }

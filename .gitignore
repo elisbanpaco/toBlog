@@ -153,7 +153,16 @@ Thumbs.db
 .vscode/keybindings.json
 *.code-workspace
 .history/
-vscode/
 
 # Scripts temporales / Scratch
 /scripts/
+
+
+# agentes
+
+.agents/
+.vscode/
+
+
+# Documentos
+docs/

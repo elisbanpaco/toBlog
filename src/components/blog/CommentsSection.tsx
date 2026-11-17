@@ -26,7 +26,7 @@ interface CommentsSectionProps {
 
 export default function CommentsSection({ postId, commentCount: initialCount, currentUserId }: CommentsSectionProps) {
   const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(initialCount);
 
   // States for the top-level form
@@ -50,18 +50,20 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
   };
 
   useEffect(() => {
-    loadComments();
-  }, []);
-
-  const loadComments = async () => {
-    setLoading(true);
-    const { data, error } = await actions.getComments({ postId });
-    if (!error && data) {
-      setComments(data as any);
-      setCount(data.length);
-    }
-    setLoading(false);
-  };
+    let active = true;
+    actions.getComments({ postId }).then(({ data, error }) => {
+      if (!active) return;
+      if (!error && data) {
+        setComments(data);
+        setCount(data.length);
+      }
+    }).catch(() => {
+      if (active) setToastMessage('Error al cargar los comentarios.');
+    }).finally(() => {
+      if (active) setLoading(false);
+    });
+    return () => { active = false; };
+  }, [postId]);
 
   const submitComment = async (content: string, parentId: string | null) => {
     if (!content.trim()) return;
@@ -76,7 +78,7 @@ export default function CommentsSection({ postId, commentCount: initialCount, cu
       }
       return false;
     } else if (data) {
-      setComments([{ ...(data as any), likeCount: 0, userLikeCount: 0 }, ...comments]);
+      setComments([{ ...data, likeCount: 0, userLikeCount: 0 }, ...comments]);
       setCount(c => c + 1);
       return true;
     }

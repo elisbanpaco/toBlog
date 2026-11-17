@@ -12,7 +12,6 @@ import {
   EyeOff,
 } from 'lucide-react';
 import {
-  type AIConfig,
   type AIProvider,
   PROVIDER_DEFAULTS,
   getAIConfig,
@@ -58,32 +57,20 @@ const PROVIDERS: ProviderOption[] = [
 ];
 
 export default function AISettingsModal({ isOpen, onClose }: Props) {
-  const [provider, setProvider] = useState<AIProvider>('ollama');
-  const [apiKey, setApiKey] = useState('');
-  const [endpoint, setEndpoint] = useState(PROVIDER_DEFAULTS.ollama.endpoint);
-  const [model, setModel] = useState(PROVIDER_DEFAULTS.ollama.model);
+  const [initialConfig] = useState(getAIConfig);
+  const [provider, setProvider] = useState<AIProvider>(initialConfig.provider);
+  const [apiKey, setApiKey] = useState(initialConfig.apiKey);
+  const [endpoint, setEndpoint] = useState(initialConfig.endpoint);
+  const [model, setModel] = useState(initialConfig.model);
   const [showApiKey, setShowApiKey] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('idle');
   const [connectionMessage, setConnectionMessage] = useState('');
   const [visible, setVisible] = useState(false);
 
-  // Load existing config on open
   useEffect(() => {
-    if (isOpen) {
-      const config = getAIConfig();
-      setProvider(config.provider);
-      setApiKey(config.apiKey);
-      setEndpoint(config.endpoint);
-      setModel(config.model);
-      setConnectionStatus('idle');
-      setConnectionMessage('');
-      setShowApiKey(false);
-
-      // Trigger enter animation
-      requestAnimationFrame(() => setVisible(true));
-    } else {
-      setVisible(false);
-    }
+    if (!isOpen) return;
+    const frame = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(frame);
   }, [isOpen]);
 
   // Switch provider: reset fields to defaults
@@ -298,7 +285,7 @@ export default function AISettingsModal({ isOpen, onClose }: Props) {
                   Asegúrate de que Ollama está corriendo con:
                 </p>
                 <code className="block mt-1.5 text-xs bg-blue-100 text-blue-900 px-2.5 py-1.5 rounded font-mono">
-                  OLLAMA_ORIGINS="*" ollama serve
+                  OLLAMA_ORIGINS=&quot;*&quot; ollama serve
                 </code>
               </div>
             )}

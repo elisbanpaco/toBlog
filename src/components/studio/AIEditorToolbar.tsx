@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Sparkles, Settings } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import AISettingsModal from './AISettingsModal';
 import AIAssistantPanel from './AIAssistantPanel';
 import { hasAIConfigured } from '../../lib/aiConfig';
@@ -61,10 +61,10 @@ export default function AIEditorToolbar({ onInsertText, selectedText }: Props) {
       </button>
 
       {/* Settings Modal */}
-      <AISettingsModal
+      {isSettingsOpen && <AISettingsModal
         isOpen={isSettingsOpen}
         onClose={handleCloseSettings}
-      />
+      />}
 
       {/* Assistant Panel */}
       <AIAssistantPanel

@@ -51,7 +51,6 @@ interface DashboardProps {
 }
 
 export default function DashboardList({ initialPosts }: DashboardProps) {
-  const [mounted, setMounted] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [statusFilter, setStatusFilter] = React.useState('ALL');
   const [openMenu, setOpenMenu] = React.useState<{ id: string, top?: number, bottom?: number, right: number } | null>(null);
@@ -60,8 +59,6 @@ export default function DashboardList({ initialPosts }: DashboardProps) {
   const menuRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    setMounted(true);
-    
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setOpenMenu(null);
@@ -132,7 +129,7 @@ export default function DashboardList({ initialPosts }: DashboardProps) {
       await navigator.clipboard.writeText(url);
       setToastMessage('Enlace copiado al portapapeles');
       setTimeout(() => setToastMessage(null), 3000);
-    } catch (e) {
+    } catch {
       alert('Error al copiar al portapapeles');
     }
   };
@@ -171,13 +168,13 @@ export default function DashboardList({ initialPosts }: DashboardProps) {
       )}
 
       {/* Custom Delete Confirmation Modal */}
-      {mounted && deleteConfirm && createPortal(
+      {deleteConfirm && createPortal(
         <div className="fixed inset-0 z-[10000] flex items-center justify-center">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setDeleteConfirm(null)}></div>
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm mx-4 relative z-10 transform transition-all p-6 animate-in fade-in zoom-in-95 duration-200">
             <h3 className="text-lg font-bold text-slate-900 mb-2">Eliminar artículo</h3>
             <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-              ¿Estás seguro de eliminar <strong>"{deleteConfirm.title}"</strong>? Esta acción no se puede deshacer.
+              ¿Estás seguro de eliminar <strong>&ldquo;{deleteConfirm.title}&rdquo;</strong>? Esta acción no se puede deshacer.
             </p>
             <div className="flex justify-end gap-3">
               <button 
@@ -391,7 +388,7 @@ export default function DashboardList({ initialPosts }: DashboardProps) {
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                         </button>
                         
-                        {mounted && openMenu?.id === post.id && createPortal(
+                        {openMenu?.id === post.id && createPortal(
                           <div 
                             ref={menuRef}
                             className="fixed w-44 bg-white border border-gray-200 rounded-lg shadow-xl py-1.5 z-[9999]"

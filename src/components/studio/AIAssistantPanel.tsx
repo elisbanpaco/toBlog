@@ -14,7 +14,6 @@ import {
   Settings,
   AlertCircle,
   Paperclip,
-  Trash2,
 } from 'lucide-react';
 import { useAI } from '../../lib/useAI';
 import { actions } from 'astro:actions';
@@ -163,8 +162,8 @@ export default function AIAssistantPanel({ isOpen, onClose, onInsert, onOpenSett
           content: data.content
         });
       }
-    } catch (err: any) {
-      setUploadError('Error al subir archivo: ' + err.message);
+    } catch (err: unknown) {
+      setUploadError('Error al subir archivo: ' + (err instanceof Error ? err.message : 'Error desconocido'));
       setTimeout(() => setUploadError(null), 4000);
     } finally {
       setIsUploading(false);
@@ -207,7 +206,7 @@ export default function AIAssistantPanel({ isOpen, onClose, onInsert, onOpenSett
     try {
       const html = await marked.parse(text);
       onInsert(html);
-    } catch (e) {
+    } catch {
       onInsert(text); // Fallback a texto plano
     }
   };
@@ -300,7 +299,7 @@ export default function AIAssistantPanel({ isOpen, onClose, onInsert, onOpenSett
                 {selectedText && (
                   <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
                     <p className="text-[10px] font-semibold text-blue-600 uppercase tracking-wider mb-1.5">Texto seleccionado</p>
-                    <p className="text-xs text-blue-800 line-clamp-3 italic">"{selectedText}"</p>
+                    <p className="text-xs text-blue-800 line-clamp-3 italic">&ldquo;{selectedText}&rdquo;</p>
                   </div>
                 )}
 

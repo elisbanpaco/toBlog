@@ -12,6 +12,18 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwind()],
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [
+              { name: 'syntax-highlighting', test: /node_modules\/(?:highlight\.js|lowlight)\// },
+              { name: 'document-engine', test: /node_modules\/prosemirror-[^/]+\// },
+            ],
+          },
+        },
+      },
+    },
     ssr: {
       noExternal: ['react-tweet']
     }

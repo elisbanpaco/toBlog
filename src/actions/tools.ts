@@ -25,9 +25,14 @@ export const toolsActions = {
         if (file.type === 'application/pdf') {
           const arrayBuffer = await file.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
-          const pdfParseModule = await import('pdf-parse');
-          const pdfParse = (pdfParseModule as any).default || pdfParseModule;
-          const data = await pdfParse(buffer, { max: 10 }); 
+          const { PDFParse } = await import('pdf-parse');
+          const parser = new PDFParse({ data: buffer });
+          let data;
+          try {
+            data = await parser.getText({ first: 10 });
+          } finally {
+            await parser.destroy();
+          }
           if (!data.text || data.text.trim().length === 0) {
             throw new Error('El PDF parece estar vacío o ser solo imágenes (escaneado).');
           }
@@ -47,8 +52,8 @@ export const toolsActions = {
         }
         
         throw new Error('Formato no soportado.');
-      } catch (err: any) {
-        throw new Error('Error al procesar el archivo: ' + err.message);
+      } catch (err: unknown) {
+        throw new Error('Error al procesar el archivo: ' + (err instanceof Error ? err.message : 'Error desconocido'));
       }
     }
   }),
